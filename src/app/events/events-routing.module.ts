@@ -7,7 +7,7 @@ import { EventBookingComponent } from './event-booking/event-booking.component';
 
 const routes: Routes = [
     { path: 'events', component: EventListingComponent },
-    { path: 'book-event', component: EventBookingComponent }
+    { path: 'book-event/:id', component: EventBookingComponent }
 ];
 
 @NgModule({
