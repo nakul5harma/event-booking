@@ -1,0 +1,24 @@
+.event-details-container {
+    margin: 20px 2% 20px;
+
+    .event-details-header {
+        .event-header-text {
+        }
+
+        .seats-available-text {
+            margin: 10px auto;
+            font-size: 15px;
+        }
+    }
+
+    .booking-form-container {
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+
+            .booking-form-field {
+                width: 20%;
+            }
+        }
+    }
+}
