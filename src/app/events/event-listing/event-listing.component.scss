@@ -1,0 +1,59 @@
+.event-list-container {
+    display: flex;
+    flex-direction: column;
+
+    .event-list-heading-text {
+        padding-left: 15px;
+        font-size: 25px;
+    }
+
+    .search-events-control {
+        width: 30%;
+        margin-left: 1%;
+    }
+
+    .event-list {
+        .event-list-item {
+            .event-card {
+                .event-card-header {
+                    .event-heading-text {
+                    }
+                }
+
+                .event-image {
+                }
+
+                .event-content {
+                }
+
+                .card-actions-container {
+                    .book-now-action-button {
+                        margin: 0 8px;
+                    }
+
+                    .sold-out-text {
+                        margin: 0;
+                        line-height: 36px;
+                        margin: 0 8px;
+                        color: orangered;
+                        font-weight: bold;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    .event-data-empty-text {
+        margin-left: 1%;
+    }
+}
+
+.mat-list-base {
+    display: flex;
+}
+
+.mat-list-base .mat-list-item {
+    height: unset;
+    min-width: 25%;
+}
