@@ -28,7 +28,7 @@ export class EventBookingComponent implements OnInit {
         this.initForm();
 
         this.bookingForm.controls.numberOfSeats.valueChanges.subscribe((noOfAttendees: number) => {
-            if (noOfAttendees > 1) {
+            if (noOfAttendees > 0) {
                 this.addAttendee(noOfAttendees);
             }
         });
@@ -39,6 +39,8 @@ export class EventBookingComponent implements OnInit {
             this.eventIndex = +params.id;
             this.eventsProviderService.getEventDetails(this.eventIndex).subscribe((eventDetails: Event) => {
                 this.eventDetails = eventDetails;
+
+                this.bookingForm.get('numberOfSeats').setValidators(Validators.max(this.eventDetails.seatsAvailable));
             });
         });
     }
@@ -58,13 +60,13 @@ export class EventBookingComponent implements OnInit {
     }
 
     public addAttendee(numberOfAttendees: number) {
-        const attendeesFormArray: FormArray = this.bookingForm.controls.noOfAttendees as FormArray;
+        const attendeesFormArray: FormArray = this.getAttendeesFormArray();
 
         while (attendeesFormArray.length > numberOfAttendees) {
             attendeesFormArray.removeAt(attendeesFormArray.length - 1);
         }
 
-        while (attendeesFormArray.length < numberOfAttendees) {
+        while (attendeesFormArray.length < Math.min(numberOfAttendees, this.eventDetails.seatsAvailable)) {
             attendeesFormArray.push(
                 new FormGroup({
                     name: new FormControl('', [ Validators.required ])
@@ -82,9 +84,21 @@ export class EventBookingComponent implements OnInit {
     }
 
     public submitBookingDetails() {
+        this.bookingForm.markAllAsTouched();
+
         if (this.bookingForm.valid) {
             this.formSubmitted = true;
             console.log(this.bookingForm.value);
         }
+    }
+
+    public getAttendees(): string {
+        let attendees = '';
+
+        this.bookingForm.value.namesOfAttendees.forEach((namesObject: { name: string }) => {
+            attendees += namesObject.name + ', ';
+        });
+
+        return attendees.slice(0, -2);
     }
 }

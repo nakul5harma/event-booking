@@ -36,14 +36,12 @@ export class EventListingComponent implements OnInit {
 
         this.searchTerm.valueChanges.subscribe((searchTerm: string) => {
             this.eventDataList = this.eventData.filter((event: Event) => {
-                return event.eventName.startsWith(searchTerm);
+                return event.eventName.toLowerCase().startsWith(searchTerm.trim().toLowerCase());
             });
         });
     }
 
     public bookNow(eventIndex: number) {
-        console.log('trying to book event with index -> ', eventIndex);
-
         this.router.navigate([ 'book-event', eventIndex ]);
     }
 }
